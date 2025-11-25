@@ -1,0 +1,28 @@
+### Maven ###
+target/
+!.mvn/wrapper/maven-wrapper.jar
+.mvn/wrapper/maven-wrapper.properties
+
+### IntelliJ IDEA ###
+.idea/
+*.iml
+*.iws
+out/
+
+### Eclipse ###
+.project
+.classpath
+.settings/
+
+### VS Code ###
+.vscode/
+
+### OS files ###
+# macOS
+.DS_Store
+# Windows
+Thumbs.db
+
+### Logs ###
+*.log
+
