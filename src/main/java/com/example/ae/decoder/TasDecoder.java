@@ -1,116 +1,176 @@
 package com.example.ae.decoder;
 
+import com.example.ae.model.Employee;
 import com.example.ae.model.TasInstance;
 import com.example.ae.model.Task;
 
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
-
-import com.example.ae.model.Employee;
 
 public class TasDecoder {
 
-	public static TasSchedule decode(int[] pi, TasInstance instance) {
-	    int numEmployees = instance.numberOfEmployees();
-	    int[] employeeAvailableTime = new int[numEmployees];
-	    int numTasks = instance.numberOfTasks();
-	    int[] taskFinish = new int[numTasks];
+    public static TasSchedule decode(int[] pi, TasInstance instance) {
+        List<Task> tasks = instance.tasks();
+        List<Employee> employees = instance.employees();
 
-	    TasSchedule schedule = new TasSchedule(instance);
+        int numTasks = tasks.size();
+        int numEmployees = employees.size();
 
-	    for (int pos = 0; pos < pi.length; pos++) {
-	        Task task = instance.tasks().get(pi[pos]);
+        TasSchedule schedule = new TasSchedule(instance);
 
-	        // Calcular el earliestStart según las precedencias
-	        int earliestStart = 0;
-	        for (int predId : task.predecessors()) {
-	            earliestStart = Math.max(earliestStart, taskFinish[predId]);
-	        }
+        // disponibilidad por empleado (tiempo final de la ultima tarea asignada)
+        int[] employeeAvailableTime = new int[numEmployees];
 
-	        // Elegir el empleado que minimice la función de coste local
-	        int bestEmpIndex = -1;
-	        double bestScore = Double.POSITIVE_INFINITY;
-
-	        for (Employee e : instance.employees()) {
-	            int empIndex = e.id(); // Asumimos id = índice
-	            int start = Math.max(earliestStart, employeeAvailableTime[empIndex]);
-
-	            // Verificar si el empleado tiene la habilidad requerida y si tiene tiempo disponible
-	            if (e.skill() < task.requiredSkill()) {
-	                continue; // Si no tiene la habilidad necesaria, continuar con el siguiente empleado
-	            }
-
-	            double localCost = localAssignmentCost(task, e, start, instance);
-
-	            if (localCost < bestScore) {
-	                bestScore = localCost;
-	                bestEmpIndex = empIndex;
-	            }
-	        }
-
-	        // Asignar al mejor empleado
-	        int startTime = Math.max(earliestStart, employeeAvailableTime[bestEmpIndex]);
-	        int finishTime = startTime + task.duration();
-
-	        schedule.getTaskToEmployee().put(task.id(), bestEmpIndex);
-	        employeeAvailableTime[bestEmpIndex] = finishTime;
-	        taskFinish[task.id()] = finishTime;
-	    }
-
-	    return schedule;
-	}
-
-
-    // ========= métodos auxiliares =========
-
-    private static double localAssignmentCost(Task task, Employee e, int start, TasInstance instance) {
-        // Penalización de habilidad: si el empleado no tiene la habilidad requerida, penalizamos
-        if (e.skill() < task.requiredSkill()) {
-            return Double.POSITIVE_INFINITY;  // Inviable: no tiene la habilidad necesaria
+        // Map taskId -> index in tasks list (to avoid id==index assumptions)
+        Map<Integer, Integer> taskIndexById = new HashMap<>();
+        for (int idx = 0; idx < numTasks; idx++) {
+            taskIndexById.put(tasks.get(idx).id(), idx);
         }
 
-        // Calcular la hora de finalización de la tarea
-        int finish = start + task.duration();
+        boolean[] scheduled = new boolean[numTasks];
+        int scheduledCount = 0;
 
-        // Penalización por sobrecarga: si el empleado está trabajando más horas de las disponibles
-        double load = finish - start;
-        double overwork = Math.max(0, load - e.availableTime()); // exceso de trabajo
+        while (scheduledCount < numTasks) {
+            boolean progress = false;
 
-        // Penalización por sobrecualificación: si el empleado tiene más habilidad de la necesaria
-        double skillMismatch = Math.max(0, e.skill() - task.requiredSkill());
-
-        // Coste total (simplificado)
-        return finish + overwork + skillMismatch;
-    }
-
-
-    public void updateScheduleObjectives(TasSchedule schedule, TasInstance instance) {
-        double dissatisfaction = 0;
-
-        // Calculamos la sobrecarga (Overload) y la sobrecualificación (Overqual)
-        for (Employee e : instance.employees()) {
-            int load = schedule.getEmployeeLoad(e.id()); // Cargar el trabajo de cada empleado
-            int availableTime = e.availableTime();
-
-            // Calcular sobrecarga (Overload_n)
-            double overload = Math.max(0, load - availableTime);
-
-            // Calcular sobrecualificación (Overqual_n) basándonos en las tareas asignadas
-            double overqual = 0;
-            for (Map.Entry<Integer, Integer> entry : schedule.getTaskToEmployee().entrySet()) {
-                if (entry.getValue() == e.id()) {
-                    Task task = instance.tasks().get(entry.getKey());  // Obtener la tarea por ID
-                    overqual += Math.max(0, e.skill() - task.requiredSkill());
+            for (int pos = 0; pos < numTasks; pos++) {
+                int taskIndex = pi[pos];
+                if (taskIndex < 0 || taskIndex >= numTasks) {
+                    throw new IllegalArgumentException("Permutation contains invalid task index: " + taskIndex);
                 }
+                if (scheduled[taskIndex]) {
+                    continue;
+                }
+
+                Task task = tasks.get(taskIndex);
+
+                // Check predecessor completion and compute earliest start
+                boolean allPredScheduled = true;
+                int earliestStart = task.releaseDate(); // respect release date
+
+                for (Integer predId : task.predecessors()) {
+                    Integer predIndex = taskIndexById.get(predId);
+                    if (predIndex == null || !scheduled[predIndex]) {
+                        allPredScheduled = false;
+                        break;
+                    } else {
+                        Integer predFinish = schedule.getTaskFinishTime(predId);
+                        if (predFinish != null && predFinish > earliestStart) {
+                            earliestStart = predFinish;
+                        }
+                    }
+                }
+
+                if (!allPredScheduled) {
+                    continue;
+                }
+
+                // Choose best employee for this task
+                int bestEmpIndex = -1;
+                int bestStart = Integer.MAX_VALUE;
+                int bestFinish = Integer.MAX_VALUE;
+                double bestCost = Double.POSITIVE_INFINITY;
+
+                for (int empIdx = 0; empIdx < numEmployees; empIdx++) {
+                    Employee e = employees.get(empIdx);
+
+                    if (!hasSkills(e, task)) {
+                        continue;
+                    }
+
+                    int start = Math.max(earliestStart, employeeAvailableTime[empIdx]);
+                    int finish = start + task.duration();
+
+                    double cost = localAssignmentCost(schedule, instance, e, task, start, finish);
+
+                    if (cost < bestCost) {
+                        bestCost = cost;
+                        bestEmpIndex = empIdx;
+                        bestStart = start;
+                        bestFinish = finish;
+                    }
+                }
+
+                if (bestEmpIndex == -1) {
+                    // No feasible employee for this ready task
+                    throw new IllegalStateException(
+                            "No feasible employee for task " + task.id() + " given current schedule");
+                }
+
+                Employee chosen = employees.get(bestEmpIndex);
+                schedule.assignTask(task.id(), chosen.id(), bestStart, bestFinish);
+                employeeAvailableTime[bestEmpIndex] = bestFinish;
+
+                scheduled[taskIndex] = true;
+                scheduledCount++;
+                progress = true;
             }
 
-            // Añadir al valor de insatisfacción
-            dissatisfaction += overload + overqual;
+            if (!progress) {
+                throw new IllegalStateException(
+                        "Decoder stalled: could not schedule all tasks. Check precedence or time windows.");
+            }
         }
 
-        // Almacenar la insatisfacción total
-        schedule.setDissatisfaction(dissatisfaction);
+        schedule.recomputeObjectives();
+        return schedule;
     }
 
+    /** Check multi-skill feasibility: empSkill_k ≥ reqSkill_k for all k where reqSkill_k > 0 */
+    private static boolean hasSkills(Employee e, Task t) {
+        double[] empSkills = e.skills();
+        double[] reqSkills = t.requiredSkills();
 
+        int dim = Math.max(empSkills.length, reqSkills.length);
+        for (int k = 0; k < dim; k++) {
+            double required = (k < reqSkills.length) ? reqSkills[k] : 0.0;
+            if (required <= 0.0) {
+                continue;
+            }
+            double level = (k < empSkills.length) ? empSkills[k] : 0.0;
+            if (level < required) {
+                return false;
+            }
+        }
+        return true;
+    }
 
+    /**
+     * Local heuristic cost: finish time + λ_over * overload + λ_overq * Σ_k α_k * positive overqualification
+     */
+    private static double localAssignmentCost(TasSchedule schedule,
+                                              TasInstance instance,
+                                              Employee e,
+                                              Task task,
+                                              int start,
+                                              int finish) {
+        int loadBefore = schedule.getEmployeeLoad(e.id());
+        int loadAfter = loadBefore + task.duration();
+
+        double overload = Math.max(0.0, loadAfter - e.availableTime());
+
+        double overqual = 0.0;
+        double[] empSkills = e.skills();
+        double[] reqSkills = task.requiredSkills();
+        int dim = Math.max(empSkills.length, reqSkills.length);
+
+        for (int k = 0; k < dim; k++) {
+            double required = (k < reqSkills.length) ? reqSkills[k] : 0.0;
+            if (required <= 0.0) {
+                continue;
+            }
+            double level = (k < empSkills.length) ? empSkills[k] : 0.0;
+            double diff = level - required;
+            if (diff > 0.0) {
+                double alpha = instance.skillWeightAlpha(k);
+                overqual += alpha * diff;
+            }
+        }
+
+        double weightedOverload = instance.lambdaOver() * overload;
+        double weightedOverqual = instance.lambdaOverq() * overqual;
+
+        return finish + weightedOverload + weightedOverqual;
+    }
 }

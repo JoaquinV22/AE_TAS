@@ -32,7 +32,7 @@ public class TasProblem implements Problem<PermutationSolution<Integer>> {
 
     @Override
     public PermutationSolution<Integer> evaluate(PermutationSolution<Integer> solution) {
-        // Extraer permutación π
+        // extraer permutacion π
         int n = solution.variables().size();
         int[] pi = new int[n];
 
@@ -40,7 +40,7 @@ public class TasProblem implements Problem<PermutationSolution<Integer>> {
             pi[i] = solution.variables().get(i);
         }
 
-        // Decodificarcon heurística TAS
+        // decodificar con heuristica TAS
         TasSchedule schedule = TasDecoder.decode(pi, instance);
 
         double makespan = schedule.getMakespan();              // F1

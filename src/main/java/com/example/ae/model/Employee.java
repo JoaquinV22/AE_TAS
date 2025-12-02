@@ -1,24 +1,32 @@
 package com.example.ae.model;
 
+import java.util.Arrays;
+
 public class Employee {
     private final int id;
-    private final int skill;
+    private final double[] skills;
     private int availableTime;
 
     // Constructor
-    public Employee(int id, int skill, int availableTime) {
+    public Employee(int id, double[] skills, int availableTime) {
         this.id = id;
-        this.skill = skill;
+        this.skills = Arrays.copyOf(skills, skills.length);
         this.availableTime = availableTime;
     }
 
-    // Métodos getter y setter
+
+
+    // getters y setters
     public int id() {
         return id;
     }
 
-    public int skill() {
-        return skill;
+    public double[] skills() {
+        return Arrays.copyOf(skills, skills.length);
+    }
+    
+    public double skill(int k) {
+        return (k >= 0 && k < skills.length) ? skills[k] : 0.0;
     }
 
     public int availableTime() {
