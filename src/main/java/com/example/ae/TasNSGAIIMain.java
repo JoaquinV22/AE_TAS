@@ -1,5 +1,6 @@
 package com.example.ae;
 
+import com.example.ae.io.TasInstanceLoader;
 import com.example.ae.model.Employee;
 import com.example.ae.model.TasInstance;
 import com.example.ae.model.Task;
@@ -16,6 +17,8 @@ import org.uma.jmetal.problem.Problem;
 import org.uma.jmetal.solution.permutationsolution.PermutationSolution;
 import org.uma.jmetal.util.comparator.dominanceComparator.impl.DefaultDominanceComparator;
 
+import java.io.IOException;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -23,23 +26,18 @@ import java.util.List;
 public class TasNSGAIIMain {
 
     public static void main(String[] args) {
-        // ejemplo con 3 skill dimensions
-        List<Task> tasks = new ArrayList<>();
-        tasks.add(new Task(0, 3, List.of(),          new double[]{1, 0, 0}, 0));
-        tasks.add(new Task(1, 2, List.of(0),        new double[]{0, 1, 0}, 0));
-        tasks.add(new Task(2, 4, List.of(0, 1),     new double[]{0, 0, 1}, 0));
-
-        List<Employee> employees = new ArrayList<>();
-        employees.add(new Employee(0, new double[]{1, 1, 0}, 8)); // E0: decente en habilidad 0/1
-        employees.add(new Employee(1, new double[]{1, 2, 1}, 8)); // E1: mejor en habilidad 1/2
-
-        // pesos α_k para sobrecalificacion
-        double[] alpha = new double[]{1.0, 1.0, 1.0};
-        double lambdaOver = 2.0;  // la sobrecarga se penaliza mas
-        double lambdaOverq = 1.0; // sobrecalificacion
-
-        TasInstance instance = new TasInstance(tasks, employees, alpha, lambdaOver, lambdaOverq);
-
+    	
+    	
+    	TasInstance instance = null;
+		try {
+			instance = TasInstanceLoader.fromJson(
+			        Paths.get("instances/instance1.json")
+			);
+		} catch (IOException e) {
+			e.printStackTrace();
+			return;
+		}
+        
         Problem<PermutationSolution<Integer>> problem = new TasProblem(instance);
 
         CrossoverOperator<PermutationSolution<Integer>> crossover = new PMXCrossover(0.8);

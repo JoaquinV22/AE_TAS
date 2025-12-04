@@ -1,0 +1,42 @@
+{
+  "skillWeightsAlpha": [1.0, 1.0, 1.0],
+  "lambdaOver": 2.0,
+  "lambdaOverq": 1.0,
+
+  "tasks": [
+    {
+      "id": 0,
+      "duration": 3,
+      "predecessors": [],
+      "requiredSkills": [1.0, 0.0, 0.0],
+      "releaseDate": 0
+    },
+    {
+      "id": 1,
+      "duration": 2,
+      "predecessors": [0],
+      "requiredSkills": [0.0, 1.0, 0.0],
+      "releaseDate": 0
+    },
+    {
+      "id": 2,
+      "duration": 4,
+      "predecessors": [0, 1],
+      "requiredSkills": [0.0, 0.0, 1.0],
+      "releaseDate": 0
+    }
+  ],
+
+  "employees": [
+    {
+      "id": 0,
+      "skills": [1.0, 1.0, 0.0],
+      "availableTime": 8
+    },
+    {
+      "id": 1,
+      "skills": [1.0, 2.0, 1.0],
+      "availableTime": 8
+    }
+  ]
+}
