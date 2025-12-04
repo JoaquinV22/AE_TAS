@@ -3,6 +3,7 @@ package com.example.ae.io;
 import com.example.ae.model.Employee;
 import com.example.ae.model.Task;
 import com.example.ae.model.TasInstance;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.IOException;
@@ -36,6 +37,7 @@ public class TasInstanceLoader {
 
     public static TasInstance fromJson(Path path) throws IOException {
         ObjectMapper mapper = new ObjectMapper();
+        mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
         InstanceDTO dto = mapper.readValue(path.toFile(), InstanceDTO.class);
 
