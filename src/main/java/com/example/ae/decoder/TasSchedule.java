@@ -1,6 +1,9 @@
 package com.example.ae.decoder;
 
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import com.example.ae.model.Employee;
@@ -157,4 +160,64 @@ public class TasSchedule {
     public void setDissatisfaction(double dissatisfaction) {
         this.dissatisfaction = dissatisfaction;
     }
+    
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("=== TasSchedule ===\n");
+        sb.append("Makespan        : ").append(makespan).append("\n");
+        sb.append("Dissatisfaction : ").append(dissatisfaction).append("\n\n");
+
+        // Por cada empleado, mostramos sus tareas en orden cronológico
+        for (Employee e : instance.employees()) {
+            int empId = e.id();
+
+            sb.append("Empleado ").append(empId).append("\n");
+            sb.append("  Carga: ")
+              .append(getEmployeeLoad(empId))
+              .append(" / ")
+              .append(e.availableTime())
+              .append("\n");
+
+            // recopilar tareas asignadas a este empleado
+            List<Integer> assignedTasks = new ArrayList<>();
+            for (Map.Entry<Integer, Integer> entry : taskToEmployee.entrySet()) {
+                if (entry.getValue() == empId) {
+                    assignedTasks.add(entry.getKey());
+                }
+            }
+
+            if (assignedTasks.isEmpty()) {
+                sb.append("  (sin tareas)\n\n");
+                continue;
+            }
+
+            // ordenarlas por tiempo de inicio
+            assignedTasks.sort(
+                    Comparator.comparingInt(taskStartTime::get)
+            );
+
+            for (Integer taskId : assignedTasks) {
+                Task t = instance.getTaskById(taskId);
+                int start = getTaskStartTime(taskId);
+                int finish = getTaskFinishTime(taskId);
+
+                sb.append("  - Tarea ")
+                  .append(taskId)
+                  .append(" (duración=")
+                  .append(t.duration())
+                  .append(") [")
+                  .append(start)
+                  .append(", ")
+                  .append(finish)
+                  .append(")\n");
+            }
+
+            sb.append("\n");
+        }
+
+        return sb.toString();
+    }
+
 }

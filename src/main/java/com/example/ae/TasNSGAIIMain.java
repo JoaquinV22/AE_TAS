@@ -1,5 +1,7 @@
 package com.example.ae;
 
+import com.example.ae.decoder.TasDecoder;
+import com.example.ae.decoder.TasSchedule;
 import com.example.ae.io.TasInstanceLoader;
 import com.example.ae.model.Employee;
 import com.example.ae.model.TasInstance;
@@ -31,7 +33,7 @@ public class TasNSGAIIMain {
     	TasInstance instance = null;
 		try {
 			instance = TasInstanceLoader.fromJson(
-			        Paths.get("instances/instance1.json")
+			        Paths.get("instances/instancia_mediana.json")
 			);
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -60,6 +62,19 @@ public class TasNSGAIIMain {
         for (PermutationSolution<Integer> sol : result) {
             System.out.println("Solucion: F1 = " + sol.objectives()[0] +
                                "  F2 = " + sol.objectives()[1]);
+            
+            // extraer la permutacion
+            int n = sol.variables().size();
+            int[] pi = new int[n];
+            for (int i = 0; i < n; i++) {
+                pi[i] = sol.variables().get(i);
+            }
+
+            // decodificar a un schedule
+            TasSchedule schedule = TasDecoder.decode(pi, instance);
+
+            // imprimir el schedule
+            System.out.println(schedule);
         }
     }
 }
