@@ -3,6 +3,7 @@ package com.example.ae;
 import com.example.ae.decoder.TasDecoder;
 import com.example.ae.decoder.TasSchedule;
 import com.example.ae.io.TasInstanceLoader;
+import com.example.ae.visual.TasSchedulePlotter;
 import com.example.ae.model.Employee;
 import com.example.ae.model.TasInstance;
 import com.example.ae.model.Task;
@@ -58,11 +59,11 @@ public class TasNSGAIIMain {
 
         algorithm.run();
         List<PermutationSolution<Integer>> result = algorithm.result();
-
+        
         for (PermutationSolution<Integer> sol : result) {
             System.out.println("Solucion: F1 = " + sol.objectives()[0] +
                                "  F2 = " + sol.objectives()[1]);
-            
+
             // extraer la permutacion
             int n = sol.variables().size();
             int[] pi = new int[n];
@@ -72,6 +73,12 @@ public class TasNSGAIIMain {
 
             // decodificar a un schedule
             TasSchedule schedule = TasDecoder.decode(pi, instance);
+
+            // mostrar gráfico en lugar del texto
+            String title = String.format("Schedule - F1=%.2f F2=%.2f",
+                                         sol.objectives()[0],
+                                         sol.objectives()[1]);
+            TasSchedulePlotter.showSchedule(schedule, title);
 
             // imprimir el schedule
             System.out.println(schedule);

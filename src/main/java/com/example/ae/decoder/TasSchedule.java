@@ -219,5 +219,14 @@ public class TasSchedule {
 
         return sb.toString();
     }
+    
+    public TasInstance getInstance() {
+        return instance;
+    }
+
+    // devuelve el id del empleado asignado a una tarea (o null si no esta)
+    public Integer getEmployeeOfTask(int taskId) {
+        return taskToEmployee.get(taskId);
+    }
 
 }
