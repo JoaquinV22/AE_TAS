@@ -1,0 +1,211 @@
+{
+  "skillWeightsAlpha": [1.0, 1.0, 1.0, 1.0, 1.0],
+  "lambdaOver": 2.0,
+  "lambdaOverq": 1.0,
+
+  "tasks": [
+    {
+      "id": 1,
+      "name": "Login del usuario",
+      "duration": 8,
+      "predecessors": [],
+      "requiredSkills": {
+        "csharp_dotnet9": 3,
+        "blazor_mudblazor_apexcharts": 0,
+        "pwa": 0,
+        "ms_sql": 3,
+        "visual_studio": 2
+      },
+      "releaseDate": 0
+    },
+    {
+      "id": 2,
+      "name": "Shell de navegación (front)",
+      "duration": 3,
+      "predecessors": [],
+      "requiredSkills": {
+        "csharp_dotnet9": 1,
+        "blazor_mudblazor_apexcharts": 3,
+        "pwa": 0,
+        "ms_sql": 0,
+        "visual_studio": 2
+      },
+      "releaseDate": 0
+    },
+    {
+      "id": 3,
+      "name": "Gestión de permisos por roles (back)",
+      "duration": 10,
+      "predecessors": [1],
+      "requiredSkills": {
+        "csharp_dotnet9": 3,
+        "blazor_mudblazor_apexcharts": 0,
+        "pwa": 0,
+        "ms_sql": 3,
+        "visual_studio": 2
+      },
+      "releaseDate": 0
+    },
+    {
+      "id": 4,
+      "name": "Creación y persistencia de datasets",
+      "duration": 25,
+      "predecessors": [],
+      "requiredSkills": {
+        "csharp_dotnet9": 3,
+        "blazor_mudblazor_apexcharts": 0,
+        "pwa": 0,
+        "ms_sql": 3,
+        "visual_studio": 2
+      },
+      "releaseDate": 0
+    },
+    {
+      "id": 5,
+      "name": "Listar datasets",
+      "duration": 1,
+      "predecessors": [4],
+      "requiredSkills": {
+        "csharp_dotnet9": 2,
+        "blazor_mudblazor_apexcharts": 0,
+        "pwa": 0,
+        "ms_sql": 1,
+        "visual_studio": 2
+      },
+      "releaseDate": 0
+    },
+    {
+      "id": 6,
+      "name": "Editar/eliminar datasets",
+      "duration": 8,
+      "predecessors": [4],
+      "requiredSkills": {
+        "csharp_dotnet9": 2,
+        "blazor_mudblazor_apexcharts": 0,
+        "pwa": 0,
+        "ms_sql": 1,
+        "visual_studio": 2
+      },
+      "releaseDate": 0
+    },
+    {
+      "id": 7,
+      "name": "Creación y persistencia de visualizaciones",
+      "duration": 35,
+      "predecessors": [4],
+      "requiredSkills": {
+        "csharp_dotnet9": 3,
+        "blazor_mudblazor_apexcharts": 0,
+        "pwa": 0,
+        "ms_sql": 3,
+        "visual_studio": 2
+      },
+      "releaseDate": 0
+    },
+    {
+      "id": 8,
+      "name": "Listar visualizaciones",
+      "duration": 1,
+      "predecessors": [7],
+      "requiredSkills": {
+        "csharp_dotnet9": 1,
+        "blazor_mudblazor_apexcharts": 3,
+        "pwa": 0,
+        "ms_sql": 0,
+        "visual_studio": 2
+      },
+      "releaseDate": 0
+    },
+    {
+      "id": 9,
+      "name": "Visualización rápida (preview)",
+      "duration": 3,
+      "predecessors": [7],
+      "requiredSkills": {
+        "csharp_dotnet9": 1,
+        "blazor_mudblazor_apexcharts": 3,
+        "pwa": 0,
+        "ms_sql": 0,
+        "visual_studio": 2
+      },
+      "releaseDate": 0
+    },
+    {
+      "id": 10,
+      "name": "Creación de dataset en una visualización (front)",
+      "duration": 2,
+      "predecessors": [4, 7],
+      "requiredSkills": {
+        "csharp_dotnet9": 1,
+        "blazor_mudblazor_apexcharts": 3,
+        "pwa": 0,
+        "ms_sql": 0,
+        "visual_studio": 2
+      },
+      "releaseDate": 0
+    }
+  ],
+
+  "employees": [
+    {
+      "id": 0,
+      "name": "Dev backend C#",
+      "skills": {
+        "csharp_dotnet9": 3,
+        "blazor_mudblazor_apexcharts": 1,
+        "pwa": 0,
+        "ms_sql": 3,
+        "visual_studio": 3
+      },
+      "availableTime": 60
+    },
+    {
+      "id": 1,
+      "name": "Dev backend + DB senior",
+      "skills": {
+        "csharp_dotnet9": 3,
+        "blazor_mudblazor_apexcharts": 0,
+        "pwa": 0,
+        "ms_sql": 3,
+        "visual_studio": 3
+      },
+      "availableTime": 60
+    },
+    {
+      "id": 2,
+      "name": "Dev frontend Blazor",
+      "skills": {
+        "csharp_dotnet9": 2,
+        "blazor_mudblazor_apexcharts": 3,
+        "pwa": 1,
+        "ms_sql": 1,
+        "visual_studio": 3
+      },
+      "availableTime": 60
+    },
+    {
+      "id": 3,
+      "name": "Dev fullstack PWA",
+      "skills": {
+        "csharp_dotnet9": 2,
+        "blazor_mudblazor_apexcharts": 2,
+        "pwa": 3,
+        "ms_sql": 1,
+        "visual_studio": 3
+      },
+      "availableTime": 60
+    },
+    {
+      "id": 4,
+      "name": "Dev backend intermedio",
+      "skills": {
+        "csharp_dotnet9": 2,
+        "blazor_mudblazor_apexcharts": 1,
+        "pwa": 0,
+        "ms_sql": 2,
+        "visual_studio": 2
+      },
+      "availableTime": 50
+    }
+  ]
+}
