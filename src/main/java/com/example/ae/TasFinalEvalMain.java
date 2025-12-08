@@ -24,6 +24,7 @@ import java.io.PrintWriter;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.*;
 import java.util.List;
+import java.util.Locale;
 
 public class TasFinalEvalMain {
 
@@ -119,6 +120,7 @@ public class TasFinalEvalMain {
                             double f2 = sol.objectives()[1];
 
                             pw.printf(
+                            		Locale.US,  // para que ponga puntos y no comas
                                     "%s,%s,%d,%.2f,%.2f,%d,%d,%.4f,%.4f,%d%n",
                                     instanceName,
                                     "NSGAII",
@@ -154,6 +156,7 @@ public class TasFinalEvalMain {
 
                         // para greedy solo hay una solucion por ejecucion -> solutionIndex = 0
                         pw.printf(
+                        		Locale.US,  // para que ponga puntos y no comas
                                 "%s,%s,%d,%.2f,%.2f,%d,%d,%.4f,%.4f,%d%n",
                                 instanceName,
                                 "GREEDY",

@@ -25,7 +25,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
+import java.util.Locale;
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -148,6 +148,7 @@ public class TasParamTuningMain {
 
                                         // instance,pop,pC,pM,run,solutionIndex,f1,f2,timeMillis
                                         pw.printf(
+                                                Locale.US,  // para que ponga puntos y no comas
                                                 "%s,%d,%.2f,%.2f,%d,%d,%.4f,%.4f,%d%n",
                                                 instanceName,
                                                 populationSize,
@@ -159,6 +160,7 @@ public class TasParamTuningMain {
                                                 f2,
                                                 timeMillis
                                         );
+
                                         solIndex++;
                                     }
 
