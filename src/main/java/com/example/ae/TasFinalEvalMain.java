@@ -39,9 +39,9 @@ public class TasFinalEvalMain {
                 "instances/instancia_grande.json"
         };
 
-        // parametros ya elegidos de NSGA-II
+        // parametros elegidos en la etapa de configuracion parametrica de NSGA-II
         final int    populationSize   = 120;
-        final double crossoverProb    = 0.90;
+        final double crossoverProb    = 1.0;
         final double mutationProb     = 0.10;
         final int    maxEvaluations   = 10000;
 
