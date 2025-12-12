@@ -25,7 +25,6 @@ public class TasInstance {
 			this.lambdaOver = lambdaOver;
 			this.lambdaOverq = lambdaOverq;
 			
-			// build the map once
 			this.taskById = new HashMap<>();
 			for (Task t : tasks) {
 			 this.taskById.put(t.id(), t);

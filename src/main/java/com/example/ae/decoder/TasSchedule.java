@@ -130,16 +130,7 @@ public class TasSchedule {
 
 
 
-
-    // funcion auxiliar para obtener el skill requerido de la tarea asignada a un empleado
-    private int getTaskRequiredSkillForEmployee(int empId) {
-        // Aquí hay que determinar cuál es el skill necesario de la tarea que está asignada a este empleado.
-        // Esto depende del modelo y de cómo gestionas las asignaciones.
-        return 1; // Este es un valor de ejemplo, hay que implementarlo según la lógica.
-    }
-
-
-    // Método para obtener el mapa de asignaciones de tareas a empleados
+    // funcion para obtener el mapa de asignaciones de tareas a empleados
     public Map<Integer, Integer> getTaskToEmployee() {
         return taskToEmployee;
     }
@@ -169,7 +160,7 @@ public class TasSchedule {
         sb.append("Makespan        : ").append(makespan).append("\n");
         sb.append("Dissatisfaction : ").append(dissatisfaction).append("\n\n");
 
-        // Por cada empleado, mostramos sus tareas en orden cronológico
+        // por cada empleado, mostramos sus tareas en orden cronologico
         for (Employee e : instance.employees()) {
             int empId = e.id();
 

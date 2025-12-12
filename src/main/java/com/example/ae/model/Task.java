@@ -52,7 +52,6 @@ public class Task {
         return (k >= 0 && k < requiredSkills.length) ? requiredSkills[k] : 0.0;
     }
 
-    // Backwards-compatible: first skill as int
     public int requiredSkill() {
         return (int) Math.round(requiredSkill(0));
     }

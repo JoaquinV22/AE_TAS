@@ -22,7 +22,7 @@ public class TasDecoder {
         // disponibilidad por empleado (tiempo final de la ultima tarea asignada)
         int[] employeeAvailableTime = new int[numEmployees];
 
-        // Map taskId -> index in tasks list (to avoid id==index assumptions)
+        // mapa taskId -> index en lista de tareas
         Map<Integer, Integer> taskIndexById = new HashMap<>();
         for (int idx = 0; idx < numTasks; idx++) {
             taskIndexById.put(tasks.get(idx).id(), idx);
@@ -45,9 +45,9 @@ public class TasDecoder {
 
                 Task task = tasks.get(taskIndex);
 
-                // Check predecessor completion and compute earliest start
+                // comprobar que se haya finalizado la tarea anterior y calcular la fecha de inicio mas temprana.
                 boolean allPredScheduled = true;
-                int earliestStart = task.releaseDate(); // respect release date
+                int earliestStart = task.releaseDate(); // respetar release date
 
                 for (Integer predId : task.predecessors()) {
                     Integer predIndex = taskIndexById.get(predId);
@@ -66,7 +66,7 @@ public class TasDecoder {
                     continue;
                 }
 
-                // Choose best employee for this task
+                // elegir el mejor empleado para esta tarea
                 int bestEmpIndex = -1;
                 int bestStart = Integer.MAX_VALUE;
                 int bestFinish = Integer.MAX_VALUE;
@@ -93,7 +93,7 @@ public class TasDecoder {
                 }
 
                 if (bestEmpIndex == -1) {
-                    // No feasible employee for this ready task
+                    // ningun empleado disponible para esta tarea
                     throw new IllegalStateException(
                             "No feasible employee for task " + task.id() + " given current schedule");
                 }
@@ -117,7 +117,7 @@ public class TasDecoder {
         return schedule;
     }
 
-    /** Check multi-skill feasibility: empSkill_k ≥ reqSkill_k for all k where reqSkill_k > 0 */
+    // chequear la viabilidad de las skills: empSkill_k ≥ reqSkill_k para todo k donde reqSkill_k > 0
     private static boolean hasSkills(Employee e, Task t) {
         double[] empSkills = e.skills();
         double[] reqSkills = t.requiredSkills();
@@ -136,9 +136,8 @@ public class TasDecoder {
         return true;
     }
 
-    /**
-     * Local heuristic cost: finish time + λ_over * overload + λ_overq * Σ_k α_k * positive overqualification
-     */
+    // costo local, heuristica: finish time + λ_over * overload + λ_overq * Σ_k α_k * overqualification
+
     private static double localAssignmentCost(TasSchedule schedule,
                                               TasInstance instance,
                                               Employee e,

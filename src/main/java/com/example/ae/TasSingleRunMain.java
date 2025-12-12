@@ -74,7 +74,7 @@ public class TasSingleRunMain {
             // decodificar a un schedule
             TasSchedule schedule = TasDecoder.decode(pi, instance);
 
-            // mostrar gráfico en lugar del texto
+            // mostrar grafico en lugar del texto
             String title = String.format("Schedule - F1=%.2f F2=%.2f",
                                          sol.objectives()[0],
                                          sol.objectives()[1]);
