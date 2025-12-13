@@ -44,8 +44,8 @@ public class TasParamTuningMain {
 
         // instancias
         String[] tuningInstanceFiles = {
-                "instances/instancia_pequena.json",
-                "instances/instancia_mediana.json"
+                "instances/instancia_pequena_tune.json",
+                "instances/instancia_mediana_tune.json"
         };
 
         // rangos de parametros a explorar

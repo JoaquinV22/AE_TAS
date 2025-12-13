@@ -1,45 +1,49 @@
 {
-  "skillWeightsAlpha": [
-    1.0,
-    1.0,
-    1.0,
-    1.0,
-    1.0
-  ],
+  "skillWeightsAlpha": [ 1.0, 1.0, 1.0, 1.0, 1.0],
   "lambdaOver": 2.0,
   "lambdaOverq": 1.0,
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
   "tasks": [
     {
       "id": 1,
-      "name": "Autenticación y sesión",
+      "name": "Login del usuario",
       "duration": 8,
       "predecessors": [],
       "requiredSkills": {
-        "csharp_dotnet9": 2,
-        "blazor_mudblazor_apexcharts": 1,
-        "pwa": 1,
-        "ms_sql": 2,
+        "csharp_dotnet9": 3,
+        "blazor_mudblazor_apexcharts": 0,
+        "pwa": 0,
+        "ms_sql": 3,
         "visual_studio": 2
       },
       "releaseDate": 0
     },
     {
       "id": 2,
-      "name": "Layout principal y menú",
+      "name": "Shell de navegación (front)",
       "duration": 3,
       "predecessors": [],
       "requiredSkills": {
         "csharp_dotnet9": 1,
-        "blazor_mudblazor_apexcharts": 2,
-        "pwa": 1,
-        "ms_sql": 1,
+        "blazor_mudblazor_apexcharts": 3,
+        "pwa": 0,
+        "ms_sql": 0,
         "visual_studio": 2
       },
       "releaseDate": 0
     },
     {
       "id": 3,
-      "name": "Roles y permisos (API)",
+      "name": "Gestión de permisos por roles (back)",
       "duration": 10,
       "predecessors": [
         1
@@ -49,73 +53,75 @@
         "blazor_mudblazor_apexcharts": 0,
         "pwa": 0,
         "ms_sql": 3,
-        "visual_studio": 1
+        "visual_studio": 2
       },
       "releaseDate": 0
     },
     {
       "id": 4,
-      "name": "Modelado de datos y migraciones",
-      "duration": 28,
-      "predecessors": [
-        1
-      ],
+      "name": "Creación y persistencia de datasets",
+      "duration": 25,
+      "predecessors": [],
       "requiredSkills": {
         "csharp_dotnet9": 3,
         "blazor_mudblazor_apexcharts": 0,
-        "pwa": 1,
+        "pwa": 0,
         "ms_sql": 3,
-        "visual_studio": 1
+        "visual_studio": 2
       },
       "releaseDate": 0
     },
     {
       "id": 5,
-      "name": "CRUD de fuentes de datos",
+      "name": "Listar datasets",
       "duration": 1,
-      "predecessors": [],
+      "predecessors": [
+        4
+      ],
       "requiredSkills": {
         "csharp_dotnet9": 2,
-        "blazor_mudblazor_apexcharts": 2,
+        "blazor_mudblazor_apexcharts": 0,
         "pwa": 0,
-        "ms_sql": 2,
+        "ms_sql": 1,
         "visual_studio": 2
       },
       "releaseDate": 0
     },
     {
       "id": 6,
-      "name": "Validaciones y reglas de negocio",
-      "duration": 6,
+      "name": "Editar/eliminar datasets",
+      "duration": 8,
       "predecessors": [
         4
       ],
       "requiredSkills": {
-        "csharp_dotnet9": 1,
-        "blazor_mudblazor_apexcharts": 1,
+        "csharp_dotnet9": 2,
+        "blazor_mudblazor_apexcharts": 0,
         "pwa": 0,
-        "ms_sql": 2,
-        "visual_studio": 3
+        "ms_sql": 1,
+        "visual_studio": 2
       },
       "releaseDate": 0
     },
     {
       "id": 7,
-      "name": "Motor de visualizaciones (API)",
-      "duration": 37,
-      "predecessors": [],
+      "name": "Creación y persistencia de visualizaciones",
+      "duration": 35,
+      "predecessors": [
+        4
+      ],
       "requiredSkills": {
-        "csharp_dotnet9": 2,
-        "blazor_mudblazor_apexcharts": 1,
-        "pwa": 1,
-        "ms_sql": 1,
-        "visual_studio": 1
+        "csharp_dotnet9": 3,
+        "blazor_mudblazor_apexcharts": 0,
+        "pwa": 0,
+        "ms_sql": 3,
+        "visual_studio": 2
       },
       "releaseDate": 0
     },
     {
       "id": 8,
-      "name": "Catálogo de visualizaciones (UI)",
+      "name": "Listar visualizaciones",
       "duration": 1,
       "predecessors": [
         7
@@ -131,7 +137,7 @@
     },
     {
       "id": 9,
-      "name": "Vista previa de visualización",
+      "name": "Visualización rápida (preview)",
       "duration": 3,
       "predecessors": [
         7
@@ -140,69 +146,69 @@
         "csharp_dotnet9": 1,
         "blazor_mudblazor_apexcharts": 3,
         "pwa": 0,
-        "ms_sql": 1,
+        "ms_sql": 0,
         "visual_studio": 2
       },
       "releaseDate": 0
     },
     {
       "id": 10,
-      "name": "Asistente de creación (UI)",
+      "name": "Creación de dataset en una visualización (front)",
       "duration": 2,
       "predecessors": [
-        4
+        4,
+        7
       ],
       "requiredSkills": {
         "csharp_dotnet9": 1,
-        "blazor_mudblazor_apexcharts": 2,
-        "pwa": 2,
-        "ms_sql": 1,
+        "blazor_mudblazor_apexcharts": 3,
+        "pwa": 0,
+        "ms_sql": 0,
         "visual_studio": 2
       },
       "releaseDate": 0
     },
     {
       "id": 11,
-      "name": "Gestión de tableros (API)",
+      "name": "Creación de dashboards",
       "duration": 9,
-      "predecessors": [
-        6
-      ],
+      "predecessors": [],
       "requiredSkills": {
-        "csharp_dotnet9": 2,
+        "csharp_dotnet9": 3,
         "blazor_mudblazor_apexcharts": 0,
         "pwa": 0,
         "ms_sql": 3,
-        "visual_studio": 1
+        "visual_studio": 2
       },
       "releaseDate": 0
     },
     {
       "id": 12,
-      "name": "Widgets KPI (API)",
-      "duration": 8,
-      "predecessors": [],
+      "name": "Creación de tarjetas KPI",
+      "duration": 7,
+      "predecessors": [
+        4
+      ],
       "requiredSkills": {
-        "csharp_dotnet9": 2,
-        "blazor_mudblazor_apexcharts": 1,
-        "pwa": 1,
-        "ms_sql": 1,
+        "csharp_dotnet9": 3,
+        "blazor_mudblazor_apexcharts": 0,
+        "pwa": 0,
+        "ms_sql": 3,
         "visual_studio": 2
       },
       "releaseDate": 0
     },
     {
       "id": 13,
-      "name": "Constructor de cards (UI)",
-      "duration": 8,
+      "name": "Creación de cards nuevas",
+      "duration": 7,
       "predecessors": [
         7,
-        9,
         11,
         12
       ],
       "requiredSkills": {
-        "csharp_dotnet9": 2,
+        "csharp_dotnet9": 1,
         "blazor_mudblazor_apexcharts": 3,
         "pwa": 0,
         "ms_sql": 0,
@@ -212,62 +218,63 @@
     },
     {
       "id": 14,
-      "name": "Edición de cards (UI)",
+      "name": "Editar card de dashboard",
       "duration": 4,
       "predecessors": [
         11,
         13
       ],
       "requiredSkills": {
-        "csharp_dotnet9": 2,
+        "csharp_dotnet9": 1,
         "blazor_mudblazor_apexcharts": 3,
         "pwa": 0,
         "ms_sql": 0,
-        "visual_studio": 3
+        "visual_studio": 2
       },
       "releaseDate": 0
     },
     {
       "id": 15,
-      "name": "Compartir tablero (API)",
-      "duration": 3,
+      "name": "Compartir dashboard (read only)",
+      "duration": 4,
       "predecessors": [
         11
       ],
       "requiredSkills": {
         "csharp_dotnet9": 2,
         "blazor_mudblazor_apexcharts": 0,
-        "pwa": 1,
-        "ms_sql": 2,
-        "visual_studio": 3
+        "pwa": 0,
+        "ms_sql": 1,
+        "visual_studio": 2
       },
       "releaseDate": 0
     },
     {
       "id": 16,
-      "name": "Visualización compartida (UI)",
-      "duration": 5,
+      "name": "Ver dashboard compartido (read only)",
+      "duration": 6,
       "predecessors": [
-        2,
         15
       ],
       "requiredSkills": {
         "csharp_dotnet9": 1,
         "blazor_mudblazor_apexcharts": 3,
-        "pwa": 1,
-        "ms_sql": 1,
-        "visual_studio": 3
+        "pwa": 0,
+        "ms_sql": 0,
+        "visual_studio": 2
       },
       "releaseDate": 0
     },
     {
       "id": 17,
-      "name": "Edición/eliminación de tableros (API)",
+      "name": "Editar/eliminar dashboard",
       "duration": 4,
-      "predecessors": [],
+      "predecessors": [
+        11
+      ],
       "requiredSkills": {
         "csharp_dotnet9": 2,
-        "blazor_mudblazor_apexcharts": 1,
+        "blazor_mudblazor_apexcharts": 0,
         "pwa": 0,
         "ms_sql": 1,
         "visual_studio": 2
@@ -276,30 +283,30 @@
     },
     {
       "id": 18,
-      "name": "Listado de tableros (UI)",
-      "duration": 2,
+      "name": "Listar dashboards",
+      "duration": 1,
       "predecessors": [
-        16
+        11
       ],
       "requiredSkills": {
         "csharp_dotnet9": 1,
-        "blazor_mudblazor_apexcharts": 2,
-        "pwa": 2,
-        "ms_sql": 1,
-        "visual_studio": 1
+        "blazor_mudblazor_apexcharts": 3,
+        "pwa": 0,
+        "ms_sql": 0,
+        "visual_studio": 2
       },
       "releaseDate": 0
     },
     {
       "id": 19,
-      "name": "Navegación entre tableros (API)",
+      "name": "Link entre dashboards",
       "duration": 6,
       "predecessors": [
         13
       ],
       "requiredSkills": {
         "csharp_dotnet9": 2,
-        "blazor_mudblazor_apexcharts": 1,
+        "blazor_mudblazor_apexcharts": 0,
         "pwa": 0,
         "ms_sql": 1,
         "visual_studio": 2
@@ -308,16 +315,15 @@
     },
     {
       "id": 20,
-      "name": "Generación de reportes (API)",
+      "name": "Crear reporte",
       "duration": 12,
       "predecessors": [
-        4,
-        8
+        4
       ],
       "requiredSkills": {
-        "csharp_dotnet9": 2,
+        "csharp_dotnet9": 3,
         "blazor_mudblazor_apexcharts": 0,
-        "pwa": 1,
+        "pwa": 0,
         "ms_sql": 3,
         "visual_studio": 2
       },
@@ -325,15 +331,15 @@
     },
     {
       "id": 21,
-      "name": "Vista previa de reportes (UI)",
-      "duration": 11,
+      "name": "Preview reporte",
+      "duration": 10,
       "predecessors": [
         20
       ],
       "requiredSkills": {
         "csharp_dotnet9": 1,
         "blazor_mudblazor_apexcharts": 3,
-        "pwa": 2,
+        "pwa": 0,
         "ms_sql": 0,
         "visual_studio": 2
       },
@@ -341,39 +347,39 @@
     },
     {
       "id": 22,
-      "name": "Filtros globales (UI)",
-      "duration": 3,
+      "name": "Aplicar filtros globales",
+      "duration": 4,
       "predecessors": [
-        16
+        20
       ],
       "requiredSkills": {
-        "csharp_dotnet9": 0,
+        "csharp_dotnet9": 1,
         "blazor_mudblazor_apexcharts": 3,
-        "pwa": 1,
+        "pwa": 0,
         "ms_sql": 0,
-        "visual_studio": 3
+        "visual_studio": 2
       },
       "releaseDate": 0
     },
     {
       "id": 23,
-      "name": "Programación de envíos (API)",
+      "name": "Programar envío",
       "duration": 6,
       "predecessors": [
         20
       ],
       "requiredSkills": {
-        "csharp_dotnet9": 3,
+        "csharp_dotnet9": 2,
         "blazor_mudblazor_apexcharts": 0,
-        "pwa": 1,
-        "ms_sql": 2,
-        "visual_studio": 1
+        "pwa": 0,
+        "ms_sql": 1,
+        "visual_studio": 2
       },
       "releaseDate": 0
     },
     {
       "id": 24,
-      "name": "Listado de reportes (UI)",
+      "name": "Listar reportes",
       "duration": 1,
       "predecessors": [
         20
@@ -381,86 +387,89 @@
       "requiredSkills": {
         "csharp_dotnet9": 1,
         "blazor_mudblazor_apexcharts": 3,
-        "pwa": 2,
-        "ms_sql": 1,
+        "pwa": 0,
+        "ms_sql": 0,
         "visual_studio": 2
       },
       "releaseDate": 0
     },
     {
       "id": 25,
-      "name": "Actualización en tiempo real (UI)",
-      "duration": 28,
+      "name": "Visualización en tiempo real",
+      "duration": 25,
       "predecessors": [
-        7
+        7,
+        12
+      ],
+      "requiredSkills": {
+        "csharp_dotnet9": 2,
+        "blazor_mudblazor_apexcharts": 2,
+        "pwa": 3,
+        "ms_sql": 0,
+        "visual_studio": 2
+      },
+      "releaseDate": 0
+    },
+
+    {
+      "id": 26,
+      "name": "Login del usuario (front)",
+      "duration": 5,
+      "predecessors": [
+        1
       ],
       "requiredSkills": {
         "csharp_dotnet9": 1,
         "blazor_mudblazor_apexcharts": 3,
-        "pwa": 1,
-        "ms_sql": 1,
+        "pwa": 0,
+        "ms_sql": 0,
         "visual_studio": 2
       },
       "releaseDate": 0
     },
     {
-      "id": 26,
-      "name": "Login (UI)",
-      "duration": 5,
-      "predecessors": [],
-      "requiredSkills": {
-        "csharp_dotnet9": 1,
-        "blazor_mudblazor_apexcharts": 3,
-        "pwa": 1,
-        "ms_sql": 0,
-        "visual_studio": 1
-      },
-      "releaseDate": 0
-    },
-    {
       "id": 27,
-      "name": "Editor de dataset (UI)",
-      "duration": 16,
+      "name": "Creación y persistencia de datasets (front)",
+      "duration": 15,
       "predecessors": [
         4
       ],
       "requiredSkills": {
         "csharp_dotnet9": 1,
-        "blazor_mudblazor_apexcharts": 1,
-        "pwa": 1,
-        "ms_sql": 1,
-        "visual_studio": 3
+        "blazor_mudblazor_apexcharts": 3,
+        "pwa": 0,
+        "ms_sql": 0,
+        "visual_studio": 2
       },
       "releaseDate": 0
     },
     {
       "id": 28,
-      "name": "Listado de datasets (UI)",
+      "name": "Listar datasets (front)",
       "duration": 3,
       "predecessors": [
-        21
+        5
       ],
       "requiredSkills": {
         "csharp_dotnet9": 1,
         "blazor_mudblazor_apexcharts": 3,
-        "pwa": 1,
+        "pwa": 0,
         "ms_sql": 0,
-        "visual_studio": 0
+        "visual_studio": 2
       },
       "releaseDate": 0
     },
     {
       "id": 29,
-      "name": "Edición de datasets (UI)",
-      "duration": 7,
+      "name": "Editar/eliminar datasets (front)",
+      "duration": 6,
       "predecessors": [
-        6,
-        8
+        6
       ],
       "requiredSkills": {
-        "csharp_dotnet9": 2,
-        "blazor_mudblazor_apexcharts": 2,
-        "pwa": 1,
+        "csharp_dotnet9": 1,
+        "blazor_mudblazor_apexcharts": 3,
+        "pwa": 0,
         "ms_sql": 0,
         "visual_studio": 2
       },
@@ -468,73 +477,72 @@
     },
     {
       "id": 30,
-      "name": "Editor de visualizaciones (UI)",
-      "duration": 17,
+      "name": "Creación y persistencia de visualizaciones (front)",
+      "duration": 20,
       "predecessors": [
-        27
+        7
       ],
       "requiredSkills": {
         "csharp_dotnet9": 1,
         "blazor_mudblazor_apexcharts": 3,
         "pwa": 2,
         "ms_sql": 0,
-        "visual_studio": 1
+        "visual_studio": 2
       },
       "releaseDate": 0
     },
     {
       "id": 31,
-      "name": "Listado de visualizaciones (API)",
-      "duration": 10,
+      "name": "Listar visualizaciones (back)",
+      "duration": 9,
       "predecessors": [
         7
       ],
       "requiredSkills": {
-        "csharp_dotnet9": 2,
-        "blazor_mudblazor_apexcharts": 1,
-        "pwa": 1,
-        "ms_sql": 1,
-        "visual_studio": 3
+        "csharp_dotnet9": 3,
+        "blazor_mudblazor_apexcharts": 0,
+        "pwa": 0,
+        "ms_sql": 2,
+        "visual_studio": 2
       },
       "releaseDate": 0
     },
     {
       "id": 32,
-      "name": "Preview de visualización (API)",
-      "duration": 2,
+      "name": "Visualización rápida (preview) (back)",
+      "duration": 4,
       "predecessors": [
-        7,
-        11
+        7
       ],
       "requiredSkills": {
-        "csharp_dotnet9": 2,
+        "csharp_dotnet9": 3,
         "blazor_mudblazor_apexcharts": 0,
-        "pwa": 1,
-        "ms_sql": 3,
+        "pwa": 0,
+        "ms_sql": 2,
         "visual_studio": 2
       },
       "releaseDate": 0
     },
     {
       "id": 33,
-      "name": "Gestión de tableros (UI)",
-      "duration": 2,
+      "name": "Creación de dashboards (front)",
+      "duration": 5,
       "predecessors": [
         11
       ],
       "requiredSkills": {
-        "csharp_dotnet9": 2,
+        "csharp_dotnet9": 1,
         "blazor_mudblazor_apexcharts": 3,
-        "pwa": 1,
-        "ms_sql": 1,
+        "pwa": 0,
+        "ms_sql": 0,
         "visual_studio": 2
       },
       "releaseDate": 0
     },
     {
       "id": 34,
-      "name": "Widgets KPI (UI)",
-      "duration": 6,
+      "name": "Creación de tarjetas KPI (front)",
+      "duration": 7,
       "predecessors": [
         12
       ],
@@ -549,8 +557,8 @@
     },
     {
       "id": 35,
-      "name": "Constructor de cards (API)",
-      "duration": 13,
+      "name": "Creación de cards nuevas (back)",
+      "duration": 15,
       "predecessors": [
         7,
         11,
@@ -567,70 +575,73 @@
     },
     {
       "id": 36,
-      "name": "Edición de cards (API)",
-      "duration": 3,
+      "name": "Editar card de dashboard (back)",
+      "duration": 2,
       "predecessors": [
-        11
+        11,
+        13
       ],
       "requiredSkills": {
         "csharp_dotnet9": 3,
         "blazor_mudblazor_apexcharts": 0,
-        "pwa": 1,
-        "ms_sql": 3,
+        "pwa": 0,
+        "ms_sql": 2,
         "visual_studio": 2
       },
       "releaseDate": 0
     },
     {
       "id": 37,
-      "name": "Compartir tablero (UI)",
-      "duration": 7,
+      "name": "Compartir dashboard (read only) (front)",
+      "duration": 6,
       "predecessors": [
         15
       ],
       "requiredSkills": {
-        "csharp_dotnet9": 0,
+        "csharp_dotnet9": 1,
         "blazor_mudblazor_apexcharts": 3,
         "pwa": 0,
-        "ms_sql": 1,
-        "visual_studio": 1
+        "ms_sql": 0,
+        "visual_studio": 2
       },
       "releaseDate": 0
     },
     {
       "id": 38,
-      "name": "Visualización compartida (API)",
-      "duration": 3,
-      "predecessors": [],
+      "name": "Ver dashboard compartido (read only) (back)",
+      "duration": 4,
+      "predecessors": [
+        15
+      ],
       "requiredSkills": {
         "csharp_dotnet9": 3,
         "blazor_mudblazor_apexcharts": 0,
-        "pwa": 1,
-        "ms_sql": 3,
-        "visual_studio": 1
+        "pwa": 0,
+        "ms_sql": 2,
+        "visual_studio": 2
       },
       "releaseDate": 0
     },
     {
       "id": 39,
-      "name": "Edición/eliminación de tableros (UI)",
-      "duration": 2,
+      "name": "Editar/eliminar dashboard (front)",
+      "duration": 1,
       "predecessors": [
         17
       ],
       "requiredSkills": {
-        "csharp_dotnet9": 2,
+        "csharp_dotnet9": 1,
         "blazor_mudblazor_apexcharts": 3,
-        "pwa": 1,
-        "ms_sql": 1,
+        "pwa": 0,
+        "ms_sql": 0,
         "visual_studio": 2
       },
       "releaseDate": 0
     },
     {
       "id": 40,
-      "name": "Listado de tableros (API)",
-      "duration": 2,
+      "name": "Listar dashboards (back)",
+      "duration": 3,
       "predecessors": [
         11
       ],
@@ -638,78 +649,79 @@
         "csharp_dotnet9": 3,
         "blazor_mudblazor_apexcharts": 0,
         "pwa": 0,
-        "ms_sql": 3,
+        "ms_sql": 2,
         "visual_studio": 2
       },
       "releaseDate": 0
     },
     {
       "id": 41,
-      "name": "Navegación entre tableros (UI)",
+      "name": "Link entre dashboards (front)",
       "duration": 5,
-      "predecessors": [],
+      "predecessors": [
+        19
+      ],
       "requiredSkills": {
         "csharp_dotnet9": 1,
         "blazor_mudblazor_apexcharts": 3,
-        "pwa": 1,
-        "ms_sql": 1,
-        "visual_studio": 1
+        "pwa": 0,
+        "ms_sql": 0,
+        "visual_studio": 2
       },
       "releaseDate": 0
     },
     {
       "id": 42,
-      "name": "Generación de reportes (UI)",
+      "name": "Crear reporte (front)",
       "duration": 7,
       "predecessors": [
         20
       ],
       "requiredSkills": {
         "csharp_dotnet9": 1,
-        "blazor_mudblazor_apexcharts": 2,
-        "pwa": 2,
-        "ms_sql": 1,
+        "blazor_mudblazor_apexcharts": 3,
+        "pwa": 0,
+        "ms_sql": 0,
         "visual_studio": 2
       },
       "releaseDate": 0
     },
     {
       "id": 43,
-      "name": "Vista previa de reportes (API)",
+      "name": "Preview reporte (back)",
       "duration": 8,
       "predecessors": [
-        20,
-        40
+        20
       ],
       "requiredSkills": {
-        "csharp_dotnet9": 2,
-        "blazor_mudblazor_apexcharts": 2,
-        "pwa": 1,
-        "ms_sql": 0,
-        "visual_studio": 3
+        "csharp_dotnet9": 3,
+        "blazor_mudblazor_apexcharts": 0,
+        "pwa": 0,
+        "ms_sql": 2,
+        "visual_studio": 2
       },
       "releaseDate": 0
     },
     {
       "id": 44,
-      "name": "Filtros globales (API)",
-      "duration": 4,
+      "name": "Aplicar filtros globales (back)",
+      "duration": 3,
       "predecessors": [
         20
       ],
       "requiredSkills": {
-        "csharp_dotnet9": 2,
+        "csharp_dotnet9": 3,
         "blazor_mudblazor_apexcharts": 0,
         "pwa": 0,
         "ms_sql": 2,
-        "visual_studio": 3
+        "visual_studio": 2
       },
       "releaseDate": 0
     },
     {
       "id": 45,
-      "name": "Programación de envíos (UI)",
-      "duration": 8,
+      "name": "Programar envío (front)",
+      "duration": 7,
       "predecessors": [
         23
       ],
@@ -717,96 +729,117 @@
         "csharp_dotnet9": 1,
         "blazor_mudblazor_apexcharts": 3,
         "pwa": 0,
-        "ms_sql": 1,
+        "ms_sql": 0,
         "visual_studio": 2
       },
       "releaseDate": 0
     },
     {
       "id": 46,
-      "name": "Listado de reportes (API)",
+      "name": "Listar reportes (back)",
       "duration": 3,
-      "predecessors": [],
+      "predecessors": [
+        20
+      ],
       "requiredSkills": {
-        "csharp_dotnet9": 2,
-        "blazor_mudblazor_apexcharts": 1,
+        "csharp_dotnet9": 3,
+        "blazor_mudblazor_apexcharts": 0,
         "pwa": 0,
-        "ms_sql": 1,
+        "ms_sql": 2,
         "visual_studio": 2
       },
       "releaseDate": 0
     },
     {
       "id": 47,
-      "name": "Tiempo real (API)",
-      "duration": 16,
+      "name": "Visualización en tiempo real (back)",
+      "duration": 15,
       "predecessors": [
         7,
-        12,
-        45
+        12
       ],
       "requiredSkills": {
         "csharp_dotnet9": 3,
         "blazor_mudblazor_apexcharts": 0,
         "pwa": 0,
-        "ms_sql": 3,
+        "ms_sql": 2,
         "visual_studio": 2
       },
       "releaseDate": 0
     }
   ],
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
   "employees": [
     {
       "id": 0,
-      "name": "Dev backend C# A",
+      "name": "Dev backend C#",
       "skills": {
-        "csharp_dotnet9": 2,
+        "csharp_dotnet9": 3,
+        "blazor_mudblazor_apexcharts": 1,
+        "pwa": 0,
+        "ms_sql": 3,
+        "visual_studio": 3
+      },
+      "availableTime": 60
+    },
+    {
+      "id": 1,
+      "name": "Dev backend + DB senior",
+      "skills": {
+        "csharp_dotnet9": 3,
         "blazor_mudblazor_apexcharts": 0,
         "pwa": 0,
         "ms_sql": 3,
         "visual_studio": 3
       },
-      "availableTime": 358
-    },
-    {
-      "id": 1,
-      "name": "Dev backend + DB B",
-      "skills": {
-        "csharp_dotnet9": 3,
-        "blazor_mudblazor_apexcharts": 0,
-        "pwa": 1,
-        "ms_sql": 3,
-        "visual_studio": 3
-      },
-      "availableTime": 358
+      "availableTime": 60
     },
     {
       "id": 2,
-      "name": "Dev frontend Blazor A",
+      "name": "Dev frontend Blazor",
       "skills": {
         "csharp_dotnet9": 2,
         "blazor_mudblazor_apexcharts": 3,
-        "pwa": 2,
-        "ms_sql": 0,
+        "pwa": 1,
+        "ms_sql": 1,
         "visual_studio": 3
       },
-      "availableTime": 358
+      "availableTime": 60
     },
     {
       "id": 3,
-      "name": "Dev fullstack PWA A",
+      "name": "Dev fullstack PWA",
       "skills": {
-        "csharp_dotnet9": 1,
-        "blazor_mudblazor_apexcharts": 1,
+        "csharp_dotnet9": 2,
+        "blazor_mudblazor_apexcharts": 2,
         "pwa": 3,
         "ms_sql": 1,
         "visual_studio": 3
       },
-      "availableTime": 358
+      "availableTime": 60
     },
     {
       "id": 4,
-      "name": "Dev backend intermedio A",
+      "name": "Dev backend intermedio",
       "skills": {
         "csharp_dotnet9": 2,
         "blazor_mudblazor_apexcharts": 1,
@@ -814,11 +847,11 @@
         "ms_sql": 2,
         "visual_studio": 2
       },
-      "availableTime": 358
+      "availableTime": 50
     },
     {
       "id": 5,
-      "name": "Dev DB / data A",
+      "name": "Dev DB / data",
       "skills": {
         "csharp_dotnet9": 2,
         "blazor_mudblazor_apexcharts": 0,
@@ -826,23 +859,23 @@
         "ms_sql": 3,
         "visual_studio": 2
       },
-      "availableTime": 358
+      "availableTime": 50
     },
     {
       "id": 6,
-      "name": "Dev frontend junior A",
+      "name": "Dev frontend junior",
       "skills": {
         "csharp_dotnet9": 1,
-        "blazor_mudblazor_apexcharts": 3,
-        "pwa": 0,
+        "blazor_mudblazor_apexcharts": 2,
+        "pwa": 1,
         "ms_sql": 0,
-        "visual_studio": 1
+        "visual_studio": 2
       },
-      "availableTime": 358
+      "availableTime": 40
     },
     {
       "id": 7,
-      "name": "Dev PWA senior A",
+      "name": "Dev PWA senior",
       "skills": {
         "csharp_dotnet9": 2,
         "blazor_mudblazor_apexcharts": 3,
@@ -850,11 +883,11 @@
         "ms_sql": 1,
         "visual_studio": 3
       },
-      "availableTime": 358
+      "availableTime": 50
     },
     {
       "id": 8,
-      "name": "Dev fullstack intermedio A",
+      "name": "Dev fullstack intermedio",
       "skills": {
         "csharp_dotnet9": 2,
         "blazor_mudblazor_apexcharts": 2,
@@ -862,19 +895,19 @@
         "ms_sql": 2,
         "visual_studio": 3
       },
-      "availableTime": 358
+      "availableTime": 50
     },
     {
       "id": 9,
-      "name": "Dev junior generalista A",
+      "name": "Dev junior generalista",
       "skills": {
         "csharp_dotnet9": 1,
         "blazor_mudblazor_apexcharts": 1,
         "pwa": 0,
         "ms_sql": 1,
-        "visual_studio": 1
+        "visual_studio": 2
       },
-      "availableTime": 358
+      "availableTime": 40
     }
   ]
 }
