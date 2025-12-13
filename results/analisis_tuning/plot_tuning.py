@@ -20,9 +20,9 @@ plt.figure()
 plt.scatter(inst_med["time_mean"], inst_med["hv_mean"])
 
 # Etiquetas de ejes y título
-plt.xlabel("Tiempo medio (ms)")
-plt.ylabel("Hipervolumen medio (HV_mean)")
-plt.title("NSGA-II: trade-off HV vs tiempo (instancia mediana)")
+plt.xlabel("Mean Time (ms)")
+plt.ylabel("Mean Hypervolume (HV_mean)")
+plt.title("NSGA-II: trade-off HV vs time (instancia mediana)")
 
 # algunos puntos interesantes (pop 120 y 200)
 configs_to_label = [
@@ -63,9 +63,9 @@ print(subset[["populationSize", "hv_mean", "time_mean"]])
 
 plt.figure()
 plt.plot(subset["populationSize"], subset["hv_mean"], marker="o")
-plt.xlabel("Tamaño de población (N)")
-plt.ylabel("Hipervolumen medio (HV_mean)")
-plt.title(f"HV medio vs población (pc={pc_fix}, pm={pm_fix}) - instancia mediana")
+plt.xlabel("Population size (N)")
+plt.ylabel("Mean Hypervolume (HV_mean)")
+plt.title(f"Mean HV vs population (pc={pc_fix}, pm={pm_fix}) - instancia mediana")
 plt.xticks(subset["populationSize"])
 
 plt.tight_layout()
