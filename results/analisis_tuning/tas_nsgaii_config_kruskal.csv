@@ -1,0 +1,3 @@
+instance,kruskal_H,p_value,n_configs,status
+instancia_mediana.json,125.0453231529313,6.448698586354641e-15,27,ok
+instancia_pequena.json,0.0,1.0,27,all_identical

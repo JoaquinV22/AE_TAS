@@ -1,0 +1,7 @@
+instance,metric,U_stat,p_value,n_nsga,n_greedy
+instancia_grande.json,hv,900.0,2.708470674786271e-14,30,30
+instancia_grande.json,timeMillis,900.0,6.296197630834241e-12,30,30
+instancia_mediana.json,hv,900.0,1.1863062247097352e-12,30,30
+instancia_mediana.json,timeMillis,900.0,2.3437682290060414e-12,30,30
+instancia_pequena.json,hv,900.0,1.685298194892643e-14,30,30
+instancia_pequena.json,timeMillis,900.0,1.5532604714189282e-12,30,30
